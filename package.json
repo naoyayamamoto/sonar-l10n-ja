@@ -1,0 +1,23 @@
+{
+  "name": "scripts",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "gts lint",
+    "clean": "gts clean",
+    "compile": "tsc",
+    "fix": "gts fix",
+    "prepare": "npm run compile",
+    "pretest": "npm run compile",
+    "posttest": "npm run lint",
+    "build": "./scripts/build.mts"
+  },
+  "devDependencies": {
+    "tsx": "^4.7.0",
+    "typescript": "~5.2.0",
+    "zx": "^7.2.3",
+    "gts": "^5.2.0",
+    "@types/node": "20.8.2"
+  }
+}

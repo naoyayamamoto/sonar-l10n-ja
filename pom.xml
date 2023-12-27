@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>org.sonarqube.l10n.ja</groupId>
+  <artifactId>sonar-l10n-ja-plugin</artifactId>
+  <packaging>sonar-plugin</packaging>
+  <version>10.3</version>
+
+  <name>L10n :: Japanese Pack</name>
+  <url>https://github.com/naoyayamamoto/sonar-l10n-ja</url>
+  <inceptionYear>2023</inceptionYear>
+  <description>Language Pack for Japanese</description>
+
+  <organization>
+    <name>Fox Hound Ltd.</name>
+    <url>http://www.fox-hound.co.jp</url>
+  </organization>
+
+  <licenses>
+    <license>
+      <name>GNU LGPL 3</name>
+      <url>http://www.gnu.org/licenses/lgpl.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <scm>
+    <connection>scm:git:https://github.com/naoyayamamoto/sonar-l10n-ja.git</connection>
+    <developerConnection>scm:git:https://github.com/naoyayamamoto/sonar-l10n-ja.git</developerConnection>
+    <url>https://github.com/naoyayamamoto/sonar-l10n-ja</url>
+    <tag>sonar-l10n-ja-plugin-10.3</tag>
+  </scm>
+
+  <issueManagement>
+    <system>GitHub Issues</system>
+    <url>https://github.com/naoyayamamoto/sonar-l10n-ja/issues</url>
+  </issueManagement>
+
+  <properties>
+    <sonar.pluginClass>org.sonar.plugins.l10n.JapanesePackPlugin</sonar.pluginClass>
+    <sonar.version>10.3.0.82913</sonar.version>
+    <sonar-plugin-api.version>9.8.0.203</sonar-plugin-api.version>
+    <junit.version>4.13.2</junit.version>
+
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+    <sonar.projectKey>naoyayamamoto_sonar-l10n-ja</sonar.projectKey>
+    <sonar.organization>naoyayamamoto</sonar.organization>
+    <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+    
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
+
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.sonarsource.api.plugin</groupId>
+      <artifactId>sonar-plugin-api</artifactId>
+      <version>${sonar-plugin-api.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.sonarsource.sonarqube</groupId>
+      <artifactId>sonar-testing-harness</artifactId>
+      <version>${sonar.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.sonarsource.sonarqube</groupId>
+      <artifactId>sonar-core</artifactId>
+      <version>${sonar.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>${junit.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+  </dependencies>
+
+  <developers>
+    <developer>
+      <id>naoyayamamoto</id>
+      <name>Naoya Yamamoto</name>
+      <organization>Fox Hound Ltd.</organization>
+      <organizationUrl>http://www.mossle.com</organizationUrl>
+    </developer>
+  </developers>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.sonarsource.sonar-packaging-maven-plugin</groupId>
+        <artifactId>sonar-packaging-maven-plugin</artifactId>
+        <version>1.18.0.372</version>
+        <extensions>true</extensions>
+        <configuration>
+          <pluginName>Japanese Pack</pluginName>
+          <pluginDescription>Language pack for Japanese</pluginDescription>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>native2ascii-maven-plugin</artifactId>
+        <version>1.0-beta-1</version>
+        <executions>
+          <execution>
+            <?m2e execute onConfiguration?>
+            <goals>
+              <goal>native2ascii</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>0.8.11</version>
+      </plugin>
+    </plugins>
+  </build>
+
+  <distributionManagement>
+    <repository>
+      <id>releases</id>
+      <name>Nexus Release Repository</name>
+      <url>file:./target/releases</url>
+    </repository>
+    <snapshotRepository>
+      <id>snapshots</id>
+      <name>Nexus Snapshot Repository</name>
+      <url>file:./target/snapshots</url>
+    </snapshotRepository>
+  </distributionManagement>
+
+  <profiles>
+    <profile>
+      <id>coverage</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.jacoco</groupId>
+            <artifactId>jacoco-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>prepare-agent</id>
+                <goals>
+                  <goal>prepare-agent</goal>
+                </goals>
+              </execution>
+              <execution>
+                <id>report</id>
+                <goals>
+                  <goal>report</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
+</project>
