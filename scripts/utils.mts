@@ -1,3 +1,6 @@
+import 'zx/globals';
+import escapeStringRegexp from 'escape-string-regexp';
+
 /**
  * @fileoverview Import translations from SonarQube Community.
  */
@@ -20,7 +23,7 @@ export async function fromJaProperties(): Promise<Record<string, string>> {
       .forEach(line => {
         const [key, value] = line.split('=');
         // escalpe /
-        translate[key] = value.replace(/\//g, '\\/');
+        translate[key] = value.replace(escapeStringRegexp('/'), '\\/');
       });
   }
   return translate;
