@@ -1,6 +1,6 @@
 #!/usr/bin/env -S node_modules/.bin/tsx
 import 'zx/globals';
-import {fromJaProperties, getVersion} from './utils.mts';
+import {fromCustomProperties, fromJaProperties, getVersion} from './utils.mts';
 
 if (!argv.debug) {
   $.verbose = false;
@@ -32,6 +32,7 @@ const masterKeys = body
 // Translate
 const translate: Record<string, string> = {
   ...(await fromJaProperties()),
+  ...(await fromCustomProperties()),
 };
 
 // Rewrite core_ja.properties to build directory
