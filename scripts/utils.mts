@@ -30,6 +30,24 @@ export async function fromJaProperties(): Promise<Record<string, string>> {
 }
 
 /**
+ * Import translations from custom file.
+ */
+export async function fromCustomProperties(): Promise<Record<string, string>> {
+  const translate: Record<string, string> = {};
+  const body = await fs.readFile('scripts/custom.properties', 'utf-8');
+  const regex = /^\S+=.+$/;
+  body
+    .split('\n')
+    .filter(line => regex.test(line))
+    .forEach(line => {
+      const [key, value] = line.split('=');
+      // escalpe /
+      translate[key] = value.replace(escapeStringRegexp('/'), '\\/');
+    });
+  return translate;
+}
+
+/**
  * Get sonarqube version from pom.xml
  */
 export async function getVersion(): Promise<string> {
