@@ -42,7 +42,10 @@ export async function fromCustomProperties(): Promise<Record<string, string>> {
     .forEach(line => {
       const [key, value] = line.split('=');
       // escalpe /
-      translate[key] = value.replace(escapeStringRegexp('/'), '\\/');
+      translate[key] = value.replace(
+        new RegExp(escapeStringRegexp('/'), 'g'),
+        '\\/'
+      );
     });
   return translate;
 }

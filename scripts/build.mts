@@ -48,7 +48,7 @@ for (const key of masterKeys) {
     try {
       await $`${command}`;
     } catch (error) {
-      console.log(key, translate[key]);
+      console.error(key, translate[key], error);
     }
   }
 }
