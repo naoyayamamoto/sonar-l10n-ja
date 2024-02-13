@@ -16,10 +16,9 @@ export async function fromJaProperties(): Promise<Record<string, string>> {
   for (const url of urls) {
     const res = await fetch(url);
     const body = await res.text();
-    const regex = /^\S+=.+$/;
     body
       .split('\n')
-      .filter(line => regex.test(line))
+      .filter(line => /^\S+=.+$/.test(line))
       .forEach(line => {
         const [key, value] = line.split('=');
         // escalpe /
@@ -35,10 +34,10 @@ export async function fromJaProperties(): Promise<Record<string, string>> {
 export async function fromCustomProperties(): Promise<Record<string, string>> {
   const translate: Record<string, string> = {};
   const body = await fs.readFile('scripts/custom.properties', 'utf-8');
-  const regex = /^\S+=.+$/;
+
   body
     .split('\n')
-    .filter(line => regex.test(line))
+    .filter(line => /^\S+=.+$/.test(line))
     .forEach(line => {
       const [key, value] = line.split('=');
       // escalpe /
@@ -51,6 +50,33 @@ export async function fromCustomProperties(): Promise<Record<string, string>> {
 }
 
 /**
+ * Import untranslated properties from current file.
+ */
+export async function fromUntraslatedProperties(): Promise<[string, string][]> {
+  const properties = await fs.readFile(
+    'src/main/resources/org/sonar/l10n/core_ja.properties',
+    'utf-8'
+  );
+  // Get translated keys
+  const translatedKeys = [
+    ...Object.keys(await fromJaProperties()),
+    ...Object.keys(await fromCustomProperties()),
+  ];
+  return properties
+    .split('\n')
+    .filter(
+      line =>
+        /^\S+=.+$/.test(line) &&
+        !isJapaneseIncluded(line.split('=')[1]) &&
+        !translatedKeys.includes(line.split('=')[0])
+    )
+    .map(line => {
+      const [key, ...value] = line.split('=');
+      return [key + '='.repeat(value.length - 1), value[value.length - 1]];
+    });
+}
+
+/**
  * Get sonarqube version from pom.xml
  */
 export async function getVersion(): Promise<string> {
@@ -60,4 +86,30 @@ export async function getVersion(): Promise<string> {
     throw new Error('Could not get version from pom.xml');
   }
   return match[1];
+}
+
+// 文字列をコードポイントの配列に変換
+function toCodePoints(str: string) {
+  const codePoints: number[] = [];
+  for (let i = 0; i < str.length; i++) {
+    codePoints.push(str.charCodeAt(i));
+  }
+  return codePoints;
+}
+
+// 文字列が日本語を含むかどうかを判定
+function isJapaneseIncluded(str: string) {
+  const codePoints = toCodePoints(str);
+  const japaneseCodePointRange = [
+    [0x3040, 0x309f],
+    [0x30a0, 0x30ff],
+    [0x3400, 0x4dbf],
+    [0x4e00, 0x9fff],
+    [0xf900, 0xfaff],
+  ];
+  return codePoints.some(codePoint =>
+    japaneseCodePointRange.some(
+      range => codePoint >= range[0] && codePoint <= range[1]
+    )
+  );
 }
