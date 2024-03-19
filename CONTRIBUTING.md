@@ -27,4 +27,4 @@ Welcome to the sonar-l10n-ja! This document outlines the process and guidelines 
 - Provide a clear and descriptive title for the pull request.
 - Include a comprehensive description of the changes.
 - Reference any related issues.
-- Ensure your code adheres to the project'
+- Ensure your code adheres to the project
