@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>org.sonarqube.l10n.ja</groupId>
   <artifactId>sonar-l10n-ja-plugin</artifactId>
   <packaging>sonar-plugin</packaging>
-  <version>10.4</version>
+  <version>10.5</version>
 
   <name>L10n :: Japanese Pack</name>
   <url>https://github.com/naoyayamamoto/sonar-l10n-ja</url>
@@ -48,7 +50,7 @@
     <sonar.projectKey>naoyayamamoto_sonar-l10n-ja</sonar.projectKey>
     <sonar.organization>naoyayamamoto</sonar.organization>
     <sonar.host.url>https://sonarcloud.io</sonar.host.url>
-    
+
     <maven.compiler.source>17</maven.compiler.source>
     <maven.compiler.target>17</maven.compiler.target>
 
