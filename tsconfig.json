@@ -5,6 +5,7 @@
     "outDir": "build",
     "target": "ES5",
     "module": "esnext",
+    "moduleResolution": "node",
   },
   "include": [
     "scripts/**/*.ts",
