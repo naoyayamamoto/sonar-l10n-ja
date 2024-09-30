@@ -13,7 +13,6 @@ const version = await getVersion();
 const url = `https://raw.githubusercontent.com/SonarSource/sonarqube/${version}/sonar-core/src/main/resources/org/sonar/l10n/core.properties`;
 const res = await fetch(url);
 const body = await res.text();
-
 // Create build directory
 await fs.mkdir('build', {recursive: true});
 // Write core.properties to build directory
@@ -36,7 +35,7 @@ const translate: Record<string, string> = {
 };
 
 // Rewrite core_ja.properties to build directory
-const sed = (await $`which gsed`) ? 'gsed' : 'sed';
+const sed = (await $({nothrow: true})`which gsed`) ? 'gsed' : 'sed';
 for (const key of masterKeys) {
   if (translate[key]) {
     const command = [
