@@ -74,6 +74,12 @@
       <artifactId>sonar-core</artifactId>
       <version>${sonar.version}</version>
       <scope>test</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>org.sonarsource.sonarqube</groupId>
+          <artifactId>sonar-sarif</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
 
     <dependency>
