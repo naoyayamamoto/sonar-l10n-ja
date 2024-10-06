@@ -35,7 +35,8 @@ const translate: Record<string, string> = {
 };
 
 // Rewrite core_ja.properties to build directory
-const sed = (await $({nothrow: true})`which gsed`) ? 'gsed' : 'sed';
+const whichSed = await $({nothrow: true})`which gsed`;
+const sed = whichSed.exitCode === 0 ? 'gsed' : 'sed';
 for (const key of masterKeys) {
   if (translate[key]) {
     const command = [
