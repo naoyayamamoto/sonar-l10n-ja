@@ -57,5 +57,5 @@ for (const key of masterKeys) {
 await fs.mkdir('src/main/resources/org/sonar/l10n', {recursive: true});
 await fs.rename(
   'build/core_ja.properties',
-  'src/main/resources/org/sonar/l10n/core_ja.properties'
+  'src/main/resources/org/sonar/l10n/core_ja.properties',
 );
