@@ -43,7 +43,7 @@ export async function fromCustomProperties(): Promise<Record<string, string>> {
       // escalpe /
       translate[key] = value.replace(
         new RegExp(escapeStringRegexp('/'), 'g'),
-        '\\/'
+        '\\/',
       );
     });
   return translate;
@@ -55,7 +55,7 @@ export async function fromCustomProperties(): Promise<Record<string, string>> {
 export async function fromUntraslatedProperties(): Promise<[string, string][]> {
   const properties = await fs.readFile(
     'src/main/resources/org/sonar/l10n/core_ja.properties',
-    'utf-8'
+    'utf-8',
   );
   // Get translated keys
   const translatedKeys = [
@@ -68,7 +68,7 @@ export async function fromUntraslatedProperties(): Promise<[string, string][]> {
       line =>
         /^\S+=.+$/.test(line) &&
         !isJapaneseIncluded(line.split('=')[1]) &&
-        !translatedKeys.includes(line.split('=')[0])
+        !translatedKeys.includes(line.split('=')[0]),
     )
     .map(line => {
       const [key, ...value] = line.split('=');
@@ -109,7 +109,7 @@ function isJapaneseIncluded(str: string) {
   ];
   return codePoints.some(codePoint =>
     japaneseCodePointRange.some(
-      range => codePoint >= range[0] && codePoint <= range[1]
-    )
+      range => codePoint >= range[0] && codePoint <= range[1],
+    ),
   );
 }

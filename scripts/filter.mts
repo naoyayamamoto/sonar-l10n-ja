@@ -16,5 +16,5 @@ await fs.mkdir('build', {recursive: true});
 // Write untranslated properties to untranslated.properties
 await fs.writeFile(
   'build/untranslated.properties',
-  untranslated.map(([key, value]) => `${key}=${value}`).join('\n')
+  untranslated.map(([key, value]) => `${key}=${value}`).join('\n'),
 );
