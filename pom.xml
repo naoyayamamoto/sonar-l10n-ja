@@ -7,7 +7,7 @@
   <groupId>org.sonarqube.l10n.ja</groupId>
   <artifactId>sonar-l10n-ja-plugin</artifactId>
   <packaging>sonar-plugin</packaging>
-  <version>24.12</version>
+  <version>25.1</version>
 
   <name>L10n :: Japanese Pack</name>
   <url>https://github.com/naoyayamamoto/sonar-l10n-ja</url>
