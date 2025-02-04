@@ -113,3 +113,18 @@ function isJapaneseIncluded(str: string) {
     ),
   );
 }
+
+/**
+ * Generate translation keys from SonarQube repository.
+ */
+export async function generateTranslationKeys(): Promise<Record<string, string>> {
+  const url = `https://raw.githubusercontent.com/SonarSource/sonarqube-webapp/master/server/sonar-web/src/main/js/l10n/default.ts`;
+  const res = await fetch(url);
+  const contents = await res.text();
+  const a = contents.indexOf('export const defaultMessages = ');
+  const b = contents.lastIndexOf(';');
+
+  const mainPart = contents.slice(a + 31, b);
+
+  return eval(`(${mainPart})`);
+}
