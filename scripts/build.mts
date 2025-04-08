@@ -1,6 +1,11 @@
 #!/usr/bin/env -S node_modules/.bin/tsx
 import 'zx/globals';
-import {fromCustomProperties, fromJaProperties, generateTranslationKeys, getVersion} from './utils.mts';
+import {
+  fromCustomProperties,
+  fromJaProperties,
+  generateTranslationKeys,
+  getVersion,
+} from './utils.mts';
 
 if (!argv.debug) {
   $.verbose = false;
@@ -31,7 +36,11 @@ Object.keys(tsBody).forEach(key => {
   }
 });
 
-const trusted = body + Object.keys(diff).map(key => `${key}=${diff[key]}`).join('\n');
+const trusted =
+  body +
+  Object.keys(diff)
+    .map(key => `${key}=${diff[key]}`)
+    .join('\n');
 
 // Create build directory
 await fs.mkdir('build', {recursive: true});
