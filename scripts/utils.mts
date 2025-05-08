@@ -121,7 +121,7 @@ function isJapaneseIncluded(str: string) {
 export async function generateTranslationKeys(): Promise<
   Record<string, string>
 > {
-  const url = `https://raw.githubusercontent.com/SonarSource/sonarqube-webapp/refs/heads/master/libs/cross-domain/sq-server-shared/src/l10n/default.ts`;
+  const url = `https://raw.githubusercontent.com/SonarSource/sonarqube-webapp/refs/heads/master/libs/sq-server-commons/src/l10n/default.ts`;
   const res = await fetch(url);
   const contents = await res.text();
   const a = contents.indexOf('export const defaultMessages = ');
